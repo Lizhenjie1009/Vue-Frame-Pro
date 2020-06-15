@@ -24,10 +24,20 @@
       </transition-group>
 
     </el-breadcrumb>
+
+    <div class="personal" @click='logout'>
+      <el-tooltip class="item" effect="light" content="退出登录" placement="bottom">
+        <el-image
+          style="width: 100%; height: 100%"
+          src="http://img3.11467.com/2019/07-29/758147394.jpg"
+          fit="fill"></el-image>
+x    </el-tooltip>
+    </div>
   </div>
 </template>
 
 <script>
+import { setStorage } from '@/utils/auth'
 
 export default {
   name: 'crumbs-bar',
@@ -60,13 +70,44 @@ export default {
   methods: {
     changeMenu () {
       this.$store.dispatch('app/generateColl', !this.$store.getters.isCollapse)
+    },
+    logout () {
+      this.$confirm('是否要退出登录?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        this.$message({
+          type: 'success',
+          message: '退出成功!'
+        })
+        setStorage('token', '')
+        this.$router.replace('/login')
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消退出'
+        })
+      })
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
+.personal {
+  width: 50px;
+  height: 50px;
+  overflow: hidden;
+  border-radius: 10px;
+  background-color: #f30;
+  position: absolute;
+  top: 5px;
+  right: 20px;
+  cursor: pointer;
+}
 #crumbs-link {
+  position: relative;
   width: 100%;
   height: 60px;
   background-color: #ffffff;

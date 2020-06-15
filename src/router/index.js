@@ -115,7 +115,7 @@ export const asyncRoutes = [
     path: '/list',
     component: Layout,
     meta: {
-      title: '列表',
+      title: '拖拽列表',
       roles: ['admin', 'editor']
     },
     children: [
