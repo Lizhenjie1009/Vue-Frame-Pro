@@ -31,7 +31,7 @@
           style="width: 100%; height: 100%"
           src="http://img3.11467.com/2019/07-29/758147394.jpg"
           fit="fill"></el-image>
-x    </el-tooltip>
+      </el-tooltip>
     </div>
   </div>
 </template>
