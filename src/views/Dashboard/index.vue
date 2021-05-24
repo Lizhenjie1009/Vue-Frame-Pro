@@ -1,5 +1,13 @@
 <template>
   <div class="dashboard-editor-container">
+    <el-select v-model="model" placeholder="">
+      <el-option
+        v-for="item in $dic.getDic('gender')"
+        :key="item.value"
+        :label="item.label"
+        :value="item.value">
+      </el-option>
+    </el-select>
 
     <el-row style="background:#fff;padding:16px 16px 0;margin-bottom:32px;">
       <line-chart :chart-data="lineChartData" />
@@ -82,8 +90,12 @@ export default {
   },
   data () {
     return {
+      model: '',
       lineChartData: lineChartData.newVisitis
     }
+  },
+  created () {
+    console.log(this.$dic.getDic('gender'))
   },
   methods: {
     handleSetLineChartData (type) {

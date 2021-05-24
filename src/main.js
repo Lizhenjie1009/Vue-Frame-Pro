@@ -3,6 +3,8 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 
+import './plugin/dic'
+
 // 引入可视化
 import dataV from '@jiaminghi/data-view'
 
