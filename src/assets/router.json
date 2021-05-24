@@ -1,0 +1,86 @@
+{
+  "menus": [
+    {
+      "id": 0,
+      "path": "/",
+      "name": "Dashboard",
+      "component": "Layout",
+      "meta": {
+        "title": "首页",
+        "onlyOnePage": true
+      }
+    },
+    {
+      "id": 2,
+      "path": "/input",
+      "name": "InputPage",
+      "component": "Layout",
+      "hidden": false,
+      "meta": {
+        "title": "表单"
+      }
+    },
+    {
+      "id": 1013,
+      "pid": 2,
+      "path": "/InputPage/index",
+      "name": "index",
+      "meta": {
+        "title": "表单",
+        "pageDir": "InputPage"
+      }
+    },
+    {
+      "id": 1,
+      "path": "/excel",
+      "name": "excel",
+      "component": "Layout",
+      "meta": {
+        "title": "Excel"
+      }
+    },
+    {
+      "id": 101,
+      "pid": 1,
+      "path": "/excel/excel-export",
+      "name": "ExcelExport",
+      "component": "@/views/ExcelPage/ExcelExport",
+      "meta": {
+        "title": "导出Excel",
+        "pageDir": "ExcelPage"
+      }
+    },
+    {
+      "id": 1011,
+      "pid": 101,
+      "path": "/111",
+      "name": "AAA",
+      "hidden": true,
+      "meta": {
+        "title": "AAA",
+        "pageDir": "AAA"
+      }
+    },
+    {
+      "id": 1012,
+      "pid": 101,
+      "path": "/222",
+      "name": "BBB",
+      "meta": {
+        "title": "BBB",
+        "pageDir": "AAA"
+      }
+    },
+    {
+      "id": 102,
+      "pid": 1,
+      "path": "/excel/excel-selected",
+      "name": "ExcelSelected",
+      "component": "@/views/ExcelPage/ExcelSelected",
+      "meta": {
+        "title": "导出已选Excel",
+        "pageDir": "ExcelPage"
+      }
+    }
+  ]
+}

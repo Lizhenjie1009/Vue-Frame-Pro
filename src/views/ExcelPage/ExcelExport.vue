@@ -1,5 +1,7 @@
 <template>
   <div class="excel-page">
+    <router-view></router-view>
+
     <div class="expend">
       <label class="radio-label" style="padding-left:10px;">搜素词: </label>
       <el-input v-model="filename" placeholder="请输入搜素词" style="width:345px;" prefix-icon="el-icon-document" />
@@ -30,6 +32,7 @@
         label="地址">
       </el-table-column>
     </el-table>
+
   </div>
 </template>
 

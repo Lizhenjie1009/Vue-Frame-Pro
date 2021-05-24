@@ -5,24 +5,42 @@ import Layout from '@/layout'
 Vue.use(Router)
 
 export const constRoutes = [
-  {
-    path: '/',
-    component: Layout,
-    redirect: '/dashboard/index',
-    meta: {
-      title: '首页'
-    },
-    children: [
-      {
-        path: '/dashboard/index',
-        name: 'dashboard',
-        component: () => import('@/views/Dashboard'),
-        meta: {
-          title: '首页'
-        }
-      }
-    ]
-  },
+  // {
+  //   path: 'test',
+  //   component: Layout,
+  //   redirect: '/test/index',
+  //   meta: {
+  //     title: '关系图'
+  //   },
+  //   children: [
+  //     {
+  //       path: '/test/index',
+  //       name: 'test',
+  //       component: () => import('@/views/Bb'),
+  //       meta: {
+  //         title: '关系图'
+  //       }
+  //     }
+  //   ]
+  // },
+  // {
+  //   path: '/',
+  //   component: Layout,
+  //   redirect: '/dashboard/index',
+  //   meta: {
+  //     title: '首页'
+  //   },
+  //   children: [
+  //     {
+  //       path: '/dashboard/index',
+  //       name: 'dashboard',
+  //       component: () => import('@/views/Dashboard'),
+  //       meta: {
+  //         title: '首页'
+  //       }
+  //     }
+  //   ]
+  // },
   {
     path: '/login',
     name: 'login',

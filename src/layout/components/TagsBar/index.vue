@@ -35,6 +35,12 @@ export default {
   },
   watch: {
     $route (val) {
+      // 首页单独处理
+      // console.log(val)
+      if (val.path === '/') {
+        this.$router.replace('/Dashboard/index')
+        return
+      }
       this.$store.dispatch('tagsbar/addTags', val)
     }
   },

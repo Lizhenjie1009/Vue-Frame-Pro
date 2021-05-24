@@ -1,4 +1,5 @@
 import { constRoutes, asyncRoutes } from '@/router'
+import Layout from '@/layout'
 
 const permission = {
   state: {
@@ -12,42 +13,80 @@ const permission = {
     }
   },
   actions: {
-    generateRoutes ({ commit }, roles) {
+    generateRoutes ({ commit }, menus) {
+      /**
+       * 1.hidden去掉不显示的route
+       * 2.对应每一个真实组件
+       * 3.处理扁平化数据为树形数据
+       * 4.父页面重定义子页面，单页面补充子页面
+       */
       return new Promise((resolve, reject) => {
-        let accessedRoutes
-        if (roles.includes('admin')) {
-          accessedRoutes = asyncRoutes || []
-        } else {
-          accessedRoutes = filterAsyncRoutes(asyncRoutes, roles)
-        }
+        // 1.非显示
+        menus.forEach((item, idx) => {
+          if (item.hidden) {
+            menus.splice(idx, 1)
+          }
+        })
+        let routes = menus.map((item, index) => {
+          // 2.对应真实组件
+          if (item.component === 'Layout') {
+            item.component = Layout
+          } else {
+            // item.component = () => import(`@/views/${item.meta.pageDir}/${item.name}`)
+            item.component = resolve => require([`@/views/${item.meta.pageDir}/${item.name}`], resolve)
+          }
+          return item
+        })
 
-        commit('SET_ROUTES', accessedRoutes)
-        resolve(accessedRoutes)
+        // 3.处理数据
+        let routesTree = dealArr(routes)
+        commit('SET_ROUTES', red(routesTree))
+        resolve(routesTree)
       })
     }
   }
 }
 
-function filterAsyncRoutes (routes, roles) {
-  const res = []
-  routes.forEach(route => {
-    const tmp = { ...route }
-    if (hasPermission(roles, tmp)) {
-      if (tmp.children) {
-        tmp.children = filterAsyncRoutes(tmp.children, roles)
-      }
-      res.push(tmp)
+// 4.重定向
+function red (arr) {
+  return arr.map(item => {
+    // 重定向到子页面的第一个
+    if (item.children) {
+      item.redirect = item.children[0].path
+      red(item.children)
+    // 只有一个子页面
+    } else if (item.meta.onlyOnePage) {
+      item.children = [{
+        path: `/${item.name}/index`,
+        name: 'index',
+        component: resolve => require([`@/views/${item.name}/index`], resolve),
+        meta: item.meta
+      }]
     }
+    return item
   })
-  return res
 }
 
-function hasPermission (roles, route) {
-  if (route.meta && route.meta.roles) {
-    return roles.some(role => route.meta.roles.includes(role))
-  } else {
-    return true
-  }
+function dealArr (arr) {
+  console.log(arr)
+  let map = {}
+  arr.forEach(item => {
+    map[item.id] = item
+  })
+
+  let result = []
+  arr.forEach(item => {
+    let mapItem = map[item.pid]
+    if (mapItem) {
+      (mapItem.children || (mapItem.children = [])).push(item)
+    } else {
+      if (item.children) {
+        console.log(item.children)
+      }
+      result.push(item)
+    }
+  })
+  return result
 }
 
 export default {

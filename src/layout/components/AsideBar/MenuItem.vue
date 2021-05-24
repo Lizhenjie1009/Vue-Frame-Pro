@@ -1,5 +1,5 @@
 <template>
-  <div class="menu-item">
+  <div class="menu-item" v-if="!item.hidden">
     <!-- 没有子路由 -->
     <template v-if="hasOneShowingChild(item)">
         <el-menu-item :index="item.children ? item.children[0].path : item.path">

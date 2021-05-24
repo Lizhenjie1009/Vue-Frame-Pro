@@ -81,7 +81,7 @@ export default {
           type: 'success',
           message: '退出成功!'
         })
-        setStorage('token', '')
+        sessionStorage.removeItem('token')
         this.$router.replace('/login')
       }).catch(() => {
         this.$message({

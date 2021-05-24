@@ -12,11 +12,13 @@
         <el-button @click="resetForm('loginForm')">重置</el-button>
       </el-form-item>
     </el-form>
+    <el-button type="primary" @click="submit">登陆</el-button>
   </div>
 </template>
 
 <script>
 import { setStorage } from '@/utils/auth'
+import routerData from '@/assets/router.json'
 
 export default {
   name: 'login',
@@ -81,6 +83,11 @@ export default {
     },
     resetForm (formName) {
       this.$refs[formName].resetFields()
+    },
+    submit () {
+      sessionStorage.setItem('token', '12312soaicugehbn')
+      sessionStorage.setItem('menus', JSON.stringify(routerData.menus))
+      this.$router.push({ path: '/' })
     }
   }
 }
