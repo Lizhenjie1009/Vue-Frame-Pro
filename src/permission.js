@@ -14,8 +14,6 @@ router.beforeEach(async (to, from, next) => {
   const token = sessionStorage.getItem('token')
   /* has token */
   if (token) {
-    console.log(token)
-
     if (to.path === '/login') {
       // if is logged in, redirect to the home page
       next({ path: '/' })
@@ -29,8 +27,9 @@ router.beforeEach(async (to, from, next) => {
     } else {
       const menus = JSON.parse(sessionStorage.getItem('menus'))
       let asyncRoutes = await store.dispatch('permission/generateRoutes', menus)
-      console.log(asyncRoutes)
       router.addRoutes(asyncRoutes)
+      // hack method to ensure that addRoutes is complete
+      // set the replace: true, so the navigation will not leave a history record
       next({ ...to, replace: true })
     }
   } else {
@@ -39,14 +38,11 @@ router.beforeEach(async (to, from, next) => {
       // in the free login whitelist, go directly
       next()
     } else {
-      console.log(token)
-
       // other pages that do not have permission to access are redirected to the login page.
       next(`/login`)
       NProgress.done()
     }
   }
-  next()
 })
 
 router.afterEach(() => {

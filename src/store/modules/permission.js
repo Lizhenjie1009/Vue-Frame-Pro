@@ -41,6 +41,7 @@ const permission = {
         // 3.处理数据
         let routesTree = dealArr(routes)
         commit('SET_ROUTES', red(routesTree))
+
         resolve(routesTree)
       })
     }
@@ -56,9 +57,10 @@ function red (arr) {
       red(item.children)
     // 只有一个子页面
     } else if (item.meta.onlyOnePage) {
+      item.redirect = `/${item.name}/index`
       item.children = [{
         path: `/${item.name}/index`,
-        name: 'index',
+        name: item.name,
         component: resolve => require([`@/views/${item.name}/index`], resolve),
         meta: item.meta
       }]

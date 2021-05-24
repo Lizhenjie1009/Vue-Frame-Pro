@@ -44,7 +44,6 @@
       "pid": 1,
       "path": "/excel/excel-export",
       "name": "ExcelExport",
-      "component": "@/views/ExcelPage/ExcelExport",
       "meta": {
         "title": "导出Excel",
         "pageDir": "ExcelPage"
@@ -52,13 +51,13 @@
     },
     {
       "id": 1011,
-      "pid": 101,
       "path": "/111",
       "name": "AAA",
-      "hidden": true,
+      "component": "Layout",
       "meta": {
         "title": "AAA",
-        "pageDir": "AAA"
+        "pageDir": "AAA",
+        "onlyOnePage": true
       }
     },
     {
@@ -76,7 +75,6 @@
       "pid": 1,
       "path": "/excel/excel-selected",
       "name": "ExcelSelected",
-      "component": "@/views/ExcelPage/ExcelSelected",
       "meta": {
         "title": "导出已选Excel",
         "pageDir": "ExcelPage"

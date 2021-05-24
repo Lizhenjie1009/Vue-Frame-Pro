@@ -87,7 +87,7 @@ export default {
     submit () {
       sessionStorage.setItem('token', '12312soaicugehbn')
       sessionStorage.setItem('menus', JSON.stringify(routerData.menus))
-      this.$router.push({ path: '/' })
+      this.$router.push({ path: '/' }).catch(err => err)
     }
   }
 }
