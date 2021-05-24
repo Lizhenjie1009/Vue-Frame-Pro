@@ -4,6 +4,20 @@ import Layout from '@/layout'
 
 Vue.use(Router)
 
+// // 解决编程式路由往同一地址跳转时会报错的情况
+// const originalPush = Router.prototype.push
+// const originalReplace = Router.prototype.replace
+// // push
+// Router.prototype.push = function push (location, onResolve, onReject) {
+//   if (onResolve || onReject) return originalPush.call(this, location, onResolve, onReject)
+//   return originalPush.call(this, location).catch(err => err)
+// }
+// // replace
+// Router.prototype.replace = function push (location, onResolve, onReject) {
+//   if (onResolve || onReject) return originalReplace.call(this, location, onResolve, onReject)
+//   return originalReplace.call(this, location).catch(err => err)
+// }
+
 export const constRoutes = [
   // {
   //   path: 'test',
@@ -79,113 +93,113 @@ export const constRoutes = [
 //   ]
 // },
 
-export const asyncRoutes = [
-  {
-    path: '/excel',
-    name: 'excel',
-    component: Layout,
-    redirect: '/excel/excel-export',
-    meta: {
-      title: 'Excel',
-      roles: ['admin', 'editor']
-    },
-    children: [
-      {
-        path: '/excel/excel-export',
-        name: 'excel-export',
-        component: () => import('@/views/ExcelPage/ExcelExport'),
-        meta: {
-          title: '导出Excel',
-          roles: ['admin', 'editor']
-        }
-      },
-      {
-        path: '/excel/excel-selected',
-        name: 'excel-selected',
-        component: () => import('@/views/ExcelPage/ExcelSelected'),
-        meta: {
-          title: '导出已选Excel',
-          roles: ['admin']
-        }
-      }
-    ]
-  },
-  {
-    path: '/input',
-    component: Layout,
-    meta: {
-      title: '表单',
-      roles: ['admin', 'editor']
-    },
-    children: [
-      {
-        path: '/input/index',
-        name: 'input',
-        component: () => import('@/views/InputPage/index'),
-        meta: {
-          title: '表单',
-          roles: ['admin', 'editor']
-        }
-      }
-    ]
-  },
-  {
-    path: '/list',
-    component: Layout,
-    meta: {
-      title: '拖拽列表',
-      roles: ['admin', 'editor']
-    },
-    children: [
-      {
-        path: '/list/index',
-        name: 'list',
-        component: () => import('@/views/ListPage/index'),
-        meta: {
-          title: '列表',
-          roles: ['admin', 'editor']
-        }
-      }
-    ]
-  },
-  {
-    path: '/permission',
-    component: Layout,
-    meta: {
-      title: '权限',
-      roles: ['admin']
-    },
-    children: [
-      {
-        path: '/permission/index',
-        name: 'permission',
-        component: () => import('@/views/Permission/index'),
-        meta: {
-          title: '权限',
-          roles: ['admin']
-        }
-      }
-    ]
-  },
-  {
-    path: '/visualization',
-    component: Layout,
-    meta: {
-      title: '可视化'
-    },
-    children: [
-      {
-        path: '/visualization/index',
-        name: 'visualization',
-        component: () => import('@/views/Visualization'),
-        meta: {
-          title: '可视化'
-        }
-      }
-    ]
-  },
-  { path: '*', redirect: '/404', hidden: true }
-]
+// export const asyncRoutes = [
+//   {
+//     path: '/excel',
+//     name: 'excel',
+//     component: Layout,
+//     redirect: '/excel/excel-export',
+//     meta: {
+//       title: 'Excel',
+//       roles: ['admin', 'editor']
+//     },
+//     children: [
+//       {
+//         path: '/excel/excel-export',
+//         name: 'excel-export',
+//         component: () => import('@/views/ExcelPage/ExcelExport'),
+//         meta: {
+//           title: '导出Excel',
+//           roles: ['admin', 'editor']
+//         }
+//       },
+//       {
+//         path: '/excel/excel-selected',
+//         name: 'excel-selected',
+//         component: () => import('@/views/ExcelPage/ExcelSelected'),
+//         meta: {
+//           title: '导出已选Excel',
+//           roles: ['admin']
+//         }
+//       }
+//     ]
+//   },
+//   {
+//     path: '/input',
+//     component: Layout,
+//     meta: {
+//       title: '表单',
+//       roles: ['admin', 'editor']
+//     },
+//     children: [
+//       {
+//         path: '/input/index',
+//         name: 'input',
+//         component: () => import('@/views/InputPage/index'),
+//         meta: {
+//           title: '表单',
+//           roles: ['admin', 'editor']
+//         }
+//       }
+//     ]
+//   },
+//   {
+//     path: '/list',
+//     component: Layout,
+//     meta: {
+//       title: '拖拽列表',
+//       roles: ['admin', 'editor']
+//     },
+//     children: [
+//       {
+//         path: '/list/index',
+//         name: 'list',
+//         component: () => import('@/views/ListPage/index'),
+//         meta: {
+//           title: '列表',
+//           roles: ['admin', 'editor']
+//         }
+//       }
+//     ]
+//   },
+//   {
+//     path: '/permission',
+//     component: Layout,
+//     meta: {
+//       title: '权限',
+//       roles: ['admin']
+//     },
+//     children: [
+//       {
+//         path: '/permission/index',
+//         name: 'permission',
+//         component: () => import('@/views/Permission/index'),
+//         meta: {
+//           title: '权限',
+//           roles: ['admin']
+//         }
+//       }
+//     ]
+//   },
+//   {
+//     path: '/visualization',
+//     component: Layout,
+//     meta: {
+//       title: '可视化'
+//     },
+//     children: [
+//       {
+//         path: '/visualization/index',
+//         name: 'visualization',
+//         component: () => import('@/views/Visualization'),
+//         meta: {
+//           title: '可视化'
+//         }
+//       }
+//     ]
+//   },
+//   { path: '*', redirect: '/404', hidden: true }
+// ]
 
 // {
 //   path: '/tab',
